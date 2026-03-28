@@ -1,4 +1,5 @@
 import JotaButton from "@/components/JotaButton";
+import { JotaColors } from "@/constants/JotaColors";
 import { Image } from "expo-image";
 import { Stack, useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
@@ -25,10 +26,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: "#343a40",
+		backgroundColor: JotaColors.background,
 	},
 	title: {
-		color: "white",
+		color: JotaColors.text,
 		fontSize: 24,
 		userSelect: "none",
 	},

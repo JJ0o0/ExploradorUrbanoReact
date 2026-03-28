@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: "#343a40",
+		backgroundColor: JotaColors.background,
 	},
 	title: {
 		color: "white",

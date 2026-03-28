@@ -36,6 +36,26 @@ const JotaCameraView = forwardRef<JotaCameraRef, Props>((props, ref) => {
 					const photo = await cameraRef.current.takePictureAsync();
 					const coords = await JotaLocation.getCurrentLocation();
 
+					let cityName = "Local desconhecido";
+					if (coords) {
+						try {
+							const geo = await Location.reverseGeocodeAsync({
+								latitude: coords.latitude,
+								longitude: coords.longitude,
+							});
+
+							if (geo.length > 0) {
+								cityName =
+									geo[0].city ||
+									geo[0].subregion ||
+									geo[0].district ||
+									"Aracaju";
+							}
+						} catch (geoError) {
+							console.log("Erro ao buscar cidade: ", geoError);
+						}
+					}
+
 					if (photo && photo.uri) {
 						const tempFileName = `temp_${Date.now()}.jpg`;
 						const secureFile = new File(
@@ -50,8 +70,9 @@ const JotaCameraView = forwardRef<JotaCameraRef, Props>((props, ref) => {
 							pathname: "/pictureInfo",
 							params: {
 								imageUri: secureFile.uri,
-								latitute: coords?.latitude.toString(),
+								latitude: coords?.latitude.toString(),
 								longitude: coords?.longitude.toString(),
+								cityName: cityName,
 							},
 						});
 					}
@@ -97,7 +118,7 @@ const styles = StyleSheet.create({
 		overflow: "hidden",
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: "#343a40",
+		backgroundColor: JotaColors.background,
 	},
 	text: {
 		color: JotaColors.text,

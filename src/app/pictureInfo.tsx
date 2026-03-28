@@ -7,10 +7,11 @@ import { useState } from "react";
 import { Alert, Image, StyleSheet, View } from "react-native";
 
 export default function PictureInfo() {
-	const { imageUri, latitude, longitude } = useLocalSearchParams<{
+	const { imageUri, latitude, longitude, cityName } = useLocalSearchParams<{
 		imageUri: string;
 		latitude: string;
 		longitude: string;
+		cityName: string;
 	}>();
 	const decodedUri = decodeURIComponent(imageUri);
 
@@ -39,7 +40,10 @@ export default function PictureInfo() {
 				imageUri,
 				description,
 				coords,
+				cityName,
 			);
+
+			console.log(coords);
 
 			if (success) {
 				if (router.canDismiss()) {
@@ -48,6 +52,7 @@ export default function PictureInfo() {
 					router.back();
 					router.back();
 				}
+
 				Alert.alert("Sucesso!", "Adicionado seu registro ao mapa!");
 			} else {
 				Alert.alert("Erro", "Não foi possível armazenar os dados");
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: "#343a40",
+		backgroundColor: JotaColors.background,
 	},
 	description: {
 		color: "white",

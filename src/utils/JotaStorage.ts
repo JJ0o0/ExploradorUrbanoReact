@@ -1,18 +1,23 @@
 import { File, Paths } from "expo-file-system";
 
-type Coords = { latitude: number; longitude: number };
 export type PhotoData = {
 	id: number;
 	imageUri: string;
 	description: string;
 	date: string;
-	location: Coords;
+	location: { latitude: number; longitude: number };
+	cityName: string;
 };
 
 const DATAFILE_NAME = "jotaSalvamentos.json";
 
 export const JotaStorage = {
-	async savePhoto(tempUri: string, description: string, coords: Coords) {
+	async savePhoto(
+		tempUri: string,
+		description: string,
+		coords: { latitude: number; longitude: number },
+		cityName: string,
+	) {
 		try {
 			const tempFile = new File(tempUri);
 
@@ -37,6 +42,7 @@ export const JotaStorage = {
 				description: description,
 				date: new Date().toISOString(),
 				location: coords,
+				cityName: cityName,
 			};
 
 			currentData.push(newItem);

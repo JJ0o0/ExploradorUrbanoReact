@@ -1,5 +1,5 @@
 export const JotaColors = {
-	background: "#343a40",
+	background: "#212529",
 	foreground: "#495057",
 	border: "white",
 	text: "white",

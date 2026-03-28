@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		borderWidth: 3,
 		borderRadius: 20,
-		borderColor: "white",
+		borderColor: JotaColors.border,
 		alignItems: "center",
 	},
 	buttonPressed: {
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
 		paddingVertical: 8,
 		borderWidth: 5,
 		borderRadius: 20,
-		borderColor: "white",
-		backgroundColor: "white",
+		borderColor: JotaColors.border,
+		backgroundColor: JotaColors.border,
 	},
 });
 
