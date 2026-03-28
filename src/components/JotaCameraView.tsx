@@ -1,8 +1,10 @@
 import { JotaColors } from "@/constants/JotaColors";
+import { JotaLocation } from "@/utils/JotaLocation";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { File, Paths } from "expo-file-system";
+import * as Location from "expo-location";
 import { useRouter } from "expo-router";
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import JotaButton from "./JotaButton";
 
@@ -17,14 +19,22 @@ export interface JotaCameraRef {
 
 const JotaCameraView = forwardRef<JotaCameraRef, Props>((props, ref) => {
 	const [permission, requestPermission] = useCameraPermissions();
+	const [location, requestLocation] = Location.useForegroundPermissions();
 	const cameraRef = useRef<CameraView>(null);
 	const router = useRouter();
+
+	useEffect(() => {
+		if (!location?.granted) {
+			requestLocation();
+		}
+	}, []);
 
 	useImperativeHandle(ref, () => ({
 		async takePicture() {
 			if (cameraRef.current) {
 				try {
 					const photo = await cameraRef.current.takePictureAsync();
+					const coords = await JotaLocation.getCurrentLocation();
 
 					if (photo && photo.uri) {
 						const tempFileName = `temp_${Date.now()}.jpg`;
@@ -38,7 +48,11 @@ const JotaCameraView = forwardRef<JotaCameraRef, Props>((props, ref) => {
 
 						router.push({
 							pathname: "/pictureInfo",
-							params: { imageUri: secureFile.uri },
+							params: {
+								imageUri: secureFile.uri,
+								latitute: coords?.latitude.toString(),
+								longitude: coords?.longitude.toString(),
+							},
 						});
 					}
 				} catch (e) {

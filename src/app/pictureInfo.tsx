@@ -1,16 +1,64 @@
 import JotaButton from "@/components/JotaButton";
 import JotaTextInput from "@/components/JotaTextInput";
 import { JotaColors } from "@/constants/JotaColors";
+import { JotaStorage } from "@/utils/JotaStorage";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Alert, Image, StyleSheet, View } from "react-native";
 
 export default function PictureInfo() {
-	const { imageUri } = useLocalSearchParams<{ imageUri: string }>();
+	const { imageUri, latitude, longitude } = useLocalSearchParams<{
+		imageUri: string;
+		latitude: string;
+		longitude: string;
+	}>();
 	const decodedUri = decodeURIComponent(imageUri);
 
 	const [description, setDescription] = useState("");
+	const [isSaving, setIsSaving] = useState(false);
 	const router = useRouter();
+
+	const handleSave = async () => {
+		if (!description.trim()) {
+			Alert.alert("Erro", "Escreva uma descrição válida!");
+			return;
+		}
+
+		if (!imageUri) {
+			return;
+		}
+
+		setIsSaving(true);
+
+		try {
+			const coords = {
+				latitude: parseFloat(latitude),
+				longitude: parseFloat(longitude),
+			};
+			const success = await JotaStorage.savePhoto(
+				imageUri,
+				description,
+				coords,
+			);
+
+			if (success) {
+				if (router.canDismiss()) {
+					router.dismiss(2);
+				} else {
+					router.back();
+					router.back();
+				}
+				Alert.alert("Sucesso!", "Adicionado seu registro ao mapa!");
+			} else {
+				Alert.alert("Erro", "Não foi possível armazenar os dados");
+			}
+		} catch (error) {
+			console.error(error);
+			Alert.alert("Erro", "Erro Crítico!");
+		} finally {
+			setIsSaving(false);
+		}
+	};
 
 	return (
 		<View style={styles.container}>
@@ -39,7 +87,10 @@ export default function PictureInfo() {
 				placeholder="Descrição"
 				placeholderColor={JotaColors.placeholder}
 			/>
-			<JotaButton text="Salvar" onPressed={() => console.log("oi")} />
+			<JotaButton
+				text={isSaving ? "Guardando..." : "Salvar"}
+				onPressed={handleSave}
+			/>
 		</View>
 	);
 }
@@ -57,7 +108,7 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		width: 300,
-		height: 250,
+		height: 500,
 		backgroundColor: "transparent",
 		userSelect: "none",
 		borderWidth: 2,
