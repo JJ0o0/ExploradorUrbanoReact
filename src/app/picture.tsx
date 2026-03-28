@@ -1,11 +1,26 @@
-import JotaCameraView from "@/components/JotaCameraView";
+import JotaCameraView, { JotaCameraRef } from "@/components/JotaCameraView";
 import JotaEmptyButton from "@/components/JotaEmptyButton";
 import { JotaColors } from "@/constants/JotaColors";
-import { Stack, useRouter } from "expo-router";
+import { Stack } from "expo-router";
+import { useRef, useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 
-export default function Index() {
-	const router = useRouter();
+export default function Picture() {
+	const [isTakingPicture, setIsTakingPicture] = useState(false);
+	const jotaCameraRef = useRef<JotaCameraRef>(null);
+
+	const handleTakePicture = async () => {
+		if (isTakingPicture) return;
+
+		setIsTakingPicture(true);
+
+		try {
+			await jotaCameraRef.current?.takePicture();
+		} catch (error) {
+			console.error(error);
+			setIsTakingPicture(false);
+		}
+	};
 
 	return (
 		<View style={styles.container}>
@@ -20,12 +35,16 @@ export default function Index() {
 					headerBackTitle: "",
 				}}
 			/>
-			<JotaCameraView size={{ width: 300, height: 400 }} />
+			<JotaCameraView
+				ref={jotaCameraRef}
+				size={{ width: 350, height: 500 }}
+			/>
 			<JotaEmptyButton
 				size={{ width: 100, height: 100 }}
 				roundness={50}
 				floating={true}
-				onPressed={() => console.log("oi")}
+				onPressed={handleTakePicture}
+				style={isTakingPicture ? { opacity: 0.5 } : {}}
 			/>
 		</View>
 	);

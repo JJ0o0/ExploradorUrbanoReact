@@ -5,7 +5,7 @@ import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { Stack, useRouter } from "expo-router";
 import { StyleSheet, View } from "react-native";
 
-export default function Index() {
+export default function Map() {
 	const router = useRouter();
 
 	return (

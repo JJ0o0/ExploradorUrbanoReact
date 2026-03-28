@@ -11,6 +11,7 @@ import {
 type Size = { width: number; height: number };
 type Props = {
 	onPressed: (event: GestureResponderEvent) => void;
+	bottomMargin?: number;
 	size?: Size;
 	roundness?: number;
 	floating?: boolean;
@@ -24,6 +25,8 @@ const JotaEmptyButton = (props: Props) => {
 		props.size !== undefined
 			? { width: props.size.width, height: props.size.height }
 			: {};
+	const dynamicPosition =
+		props.bottomMargin !== undefined ? { bottom: props.bottomMargin } : {};
 
 	return (
 		<Pressable
@@ -36,6 +39,7 @@ const JotaEmptyButton = (props: Props) => {
 					: pressed
 						? styles.buttonPressed
 						: styles.button,
+				props.floating ? dynamicPosition : {},
 				dynamicSize,
 				dynamicRoundness,
 				props.style,
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		position: "absolute",
-		bottom: 30,
+		bottom: 50,
 		elevation: 5,
 		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 2 },
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		position: "absolute",
-		bottom: 30,
+		bottom: 50,
 		elevation: 5,
 		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 2 },

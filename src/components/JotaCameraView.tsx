@@ -1,6 +1,8 @@
 import { JotaColors } from "@/constants/JotaColors";
 import { CameraView, useCameraPermissions } from "expo-camera";
-import { useRef } from "react";
+import { File, Paths } from "expo-file-system";
+import { useRouter } from "expo-router";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import JotaButton from "./JotaButton";
 
@@ -9,9 +11,42 @@ type Props = {
 	size: Size;
 };
 
-const JotaCameraView = (props: Props) => {
+export interface JotaCameraRef {
+	takePicture: () => Promise<void>;
+}
+
+const JotaCameraView = forwardRef<JotaCameraRef, Props>((props, ref) => {
 	const [permission, requestPermission] = useCameraPermissions();
 	const cameraRef = useRef<CameraView>(null);
+	const router = useRouter();
+
+	useImperativeHandle(ref, () => ({
+		async takePicture() {
+			if (cameraRef.current) {
+				try {
+					const photo = await cameraRef.current.takePictureAsync();
+
+					if (photo && photo.uri) {
+						const tempFileName = `temp_${Date.now()}.jpg`;
+						const secureFile = new File(
+							Paths.document,
+							tempFileName,
+						);
+
+						const cacheFile = new File(photo.uri);
+						await cacheFile.move(secureFile);
+
+						router.push({
+							pathname: "/pictureInfo",
+							params: { imageUri: secureFile.uri },
+						});
+					}
+				} catch (e) {
+					console.log("Erro ao tirar foto: ", e);
+				}
+			}
+		},
+	}));
 
 	if (!permission) {
 		return <View />;
@@ -31,12 +66,6 @@ const JotaCameraView = (props: Props) => {
 		);
 	}
 
-	const takePicture = async () => {
-		if (cameraRef.current) {
-			const photo = await cameraRef.current.takePictureAsync();
-		}
-	};
-
 	return (
 		<View style={[styles.container, props.size]}>
 			<CameraView
@@ -46,7 +75,7 @@ const JotaCameraView = (props: Props) => {
 			/>
 		</View>
 	);
-};
+});
 
 const styles = StyleSheet.create({
 	container: {
