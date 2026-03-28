@@ -1,6 +1,4 @@
 import { JotaColors } from "@/constants/JotaColors";
-import { IconDefinition, IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React from "react";
 import {
 	GestureResponderEvent,
@@ -10,17 +8,22 @@ import {
 	ViewStyle,
 } from "react-native";
 
+type Size = { width: number; height: number };
 type Props = {
-	icon: IconDefinition;
 	onPressed: (event: GestureResponderEvent) => void;
-	floating?: boolean;
+	size?: Size;
 	roundness?: number;
+	floating?: boolean;
 	style?: StyleProp<ViewStyle>;
 };
 
-const JotaIconButton = (props: Props) => {
+const JotaEmptyButton = (props: Props) => {
 	const dynamicRoundness =
 		props.roundness !== undefined ? { borderRadius: props.roundness } : {};
+	const dynamicSize =
+		props.size !== undefined
+			? { width: props.size.width, height: props.size.height }
+			: {};
 
 	return (
 		<Pressable
@@ -33,20 +36,12 @@ const JotaIconButton = (props: Props) => {
 					: pressed
 						? styles.buttonPressed
 						: styles.button,
+				dynamicSize,
 				dynamicRoundness,
 				props.style,
 			]}
 			onPress={props.onPressed}
-		>
-			{({ pressed }) => (
-				<FontAwesomeIcon
-					style={{ userSelect: "none" }}
-					icon={props.icon as IconProp}
-					color={pressed ? JotaColors.foreground : "white"}
-					size={40}
-				/>
-			)}
-		</Pressable>
+		></Pressable>
 	);
 };
 
@@ -103,4 +98,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default JotaIconButton;
+export default JotaEmptyButton;

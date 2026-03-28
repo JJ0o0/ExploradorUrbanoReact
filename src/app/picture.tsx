@@ -1,9 +1,8 @@
-import JotaIconButton from "@/components/JotaIconButton";
+import JotaCameraView from "@/components/JotaCameraView";
+import JotaEmptyButton from "@/components/JotaEmptyButton";
 import { JotaColors } from "@/constants/JotaColors";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { Stack, useRouter } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 
 export default function Index() {
 	const router = useRouter();
@@ -14,17 +13,19 @@ export default function Index() {
 				options={{
 					headerShown: true,
 					headerStyle: styles.header,
+					headerTitleStyle: styles.headerTitle,
 					headerTransparent: true,
 					headerTintColor: JotaColors.text,
 					headerTitle: "Voltar",
 					headerBackTitle: "",
 				}}
 			/>
-			<JotaIconButton
-				icon={faAngleUp as IconDefinition}
-				onPressed={() => router.navigate("/picture")}
+			<JotaCameraView size={{ width: 300, height: 400 }} />
+			<JotaEmptyButton
+				size={{ width: 100, height: 100 }}
+				roundness={50}
 				floating={true}
-				roundness={35}
+				onPressed={() => console.log("oi")}
 			/>
 		</View>
 	);
@@ -50,6 +51,13 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		backgroundColor: "transparent",
-		userSelect: "none",
+	},
+	headerTitle: {
+		...Platform.select({
+			web: {
+				userSelect: "none",
+			} as any,
+			default: {},
+		}),
 	},
 });
