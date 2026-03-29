@@ -1,56 +1,106 @@
-# Welcome to your Expo app 👋
+<div align="center">
+  <img src="./assets/images/icon.png" width="150px" height="150px" alt="Ícone Explorador Urbano" style="border-radius: 20%;" />
+  
+  <h1>Explorador Urbano</h1>
+  <p><i>Seu Diário de Bordo Digital para Aventuras na Cidade</i></p>
+  
+  <hr />
+</div>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+O **Explorador Urbano** é um diário de bordo digital para quem ama explorar a cidade. O aplicativo permite capturar momentos, registrar a localização exata de cada descoberta e visualizar todas as suas aventuras em um mapa interativo e inteligente.
 
-## Get started
+Este projeto foi desenvolvido como parte da atividade prática da disciplina de Desenvolvimento Mobile do curso de Análise e Desenvolvimento de Sistemas no SENAI, sob orientação do **Prof. Neilton Barreto**.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## Funcionalidades Principais
 
-2. Start the app
+- **Captura de Momentos:** Câmera integrada para registrar locais em tempo real.
+- **Geolocalização Automática:** Captura de latitude e longitude no momento da foto.
+- **Geocodificação Reversa:** O app identifica automaticamente o nome da cidade/bairro da exploração.
+- **Mapa Interativo:** Visualização de registros em um mapa estilizado.
+- **Sistema de Sobreposição:** Organização inteligente de múltiplos registros no mesmo local, evitando sobreposição de marcadores.
+- **Diário Visual:** Popups com foto, descrição, local e data/hora da captura.
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## Tecnologias Utilizadas
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+O projeto foi construído utilizando o **React Native + Expo**:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Framework:** [React Native](https://reactnative.dev/) com **Expo Router**
+- **Mapa:** [Leaflet](https://leafletjs.com/) via **WebView**
+- **Câmera:** [Expo Camera](https://docs.expo.dev/versions/latest/sdk/camera/).
+- **Localização:** [Expo Location](https://docs.expo.dev/versions/latest/sdk/location/).
+- **Persistência de Dados:** [AsyncStorage](https://react-native-async-storage.github.io/async-storage/).
+- **Manipulação de Arquivos:** [Expo FileSystem](https://docs.expo.dev/versions/latest/sdk/filesystem/).
+- **Estilização de Mapas:** [CartoDB Dark Matter](https://carto.com/help/working-with-data/carto-basemaps/).
+- **Plugins de Mapa:** [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster).
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## Screenshots
 
-```bash
-npm run reset-project
-```
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="./assets/screenshots/screenshot_index.jpeg" width="220px" alt="Tela Inicial" />
+        <br />
+        <sub><b>Tela Inicial</b></sub>
+      </td>
+      <td align="center">
+        <img src="./assets/screenshots/screenshot_mapa.jpeg" width="220px" alt="Mapa com Marcadores" />
+        <br />
+        <sub><b>Mapa com Marcadores</b></sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="./assets/screenshots/screenshot_photo.jpeg" width="220px" alt="Câmera" />
+        <br />
+        <sub><b>Câmera para fotografia do local</b></sub>
+      </td>
+      <td align="center">
+        <img src="./assets/screenshots/screenshot_details.jpeg" width="220px" alt="Tela de Adicionar Detalhes" />
+        <br />
+        <sub><b>Tela de Adicionar Detalhes</b></sub>
+      </td>
+    </tr>
+  </table>
+</div>
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Como compilar o projeto
 
-### Other setup steps
+1. **Clone o repositório:**
+    ```bash
+    git clone https://github.com/JJ0o0/ExploradorUrbanoReact.git
+    ```
+2. **Instale as dependências:**
+    ```bash
+     npm install
+    ```
+3. **Inicie o Expo:**
+    ```bash
+     npx expo start
+    ```
+4. **Para gerar o APK (via EAS Build):**
+    ```bash
+    eas build -p android --profile preview
+    ```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+---
 
-## Learn more
+## Desenvolvedor
 
-To learn more about developing your project with Expo, look at the following resources:
+Nome: João Gabriel Ribeiro Matos (a.k.a JJ0o0)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## Licença
 
-Join our community of developers creating universal apps.
+Este projeto está sob a licença [MIT](./LICENSE).
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+_Projeto desenvolvido para fins educacionais - 2026_
