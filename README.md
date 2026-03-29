@@ -32,10 +32,10 @@ O projeto foi construído utilizando o **React Native + Expo**:
 - **Mapa:** [Leaflet](https://leafletjs.com/) via **WebView**
 - **Câmera:** [Expo Camera](https://docs.expo.dev/versions/latest/sdk/camera/).
 - **Localização:** [Expo Location](https://docs.expo.dev/versions/latest/sdk/location/).
-- **Persistência de Dados:** [AsyncStorage](https://react-native-async-storage.github.io/async-storage/).
+- **Persistência de Dados:** [AsyncStorage](https://docs.expo.dev/versions/latest/sdk/async-storage/).
 - **Manipulação de Arquivos:** [Expo FileSystem](https://docs.expo.dev/versions/latest/sdk/filesystem/).
-- **Estilização de Mapas:** [CartoDB Dark Matter](https://carto.com/help/working-with-data/carto-basemaps/).
-- **Plugins de Mapa:** [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster).
+- **Estilização de Mapas:** [CartoDB Dark Matter](https://carto.com/basemaps/).
+- **Plugins de Mapa:** [Leaflet.markercluster](https://github.com/leaflet/leaflet.markercluster).
 
 ---
 
