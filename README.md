@@ -89,6 +89,8 @@ O projeto foi construído utilizando o **React Native + Expo**:
     eas build -p android --profile preview
     ```
 
+_Aviso! Esse projeto usa bibliotecas que NÃO são normalmente suportadas no Navegador. Caso for rodar web, tenha conciência disto._
+
 ---
 
 ## Desenvolvedor
