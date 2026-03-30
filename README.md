@@ -2,7 +2,7 @@
   <img src="./assets/images/icon.png" width="150px" height="150px" alt="Ícone Explorador Urbano" style="border-radius: 20%;" />
   
   <h1>Explorador Urbano</h1>
-  <p><i>Seu Diário de Bordo Digital para Aventuras na Cidade</i></p>
+  <p><i>Seu Diário de Bordo Digital para Explorações na Cidade</i></p>
   
   <hr />
 </div>
