@@ -2,6 +2,7 @@ import JotaButton from "@/components/JotaButton";
 import JotaTextInput from "@/components/JotaTextInput";
 import { JotaColors } from "@/constants/JotaColors";
 import { JotaStorage } from "@/utils/JotaStorage";
+import { HeaderBackButton } from "@react-navigation/elements";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -101,6 +102,12 @@ export default function PictureInfo() {
 								? "Editar Local"
 								: "Novo Local",
 							headerBackTitle: "",
+							headerLeft: () => (
+								<HeaderBackButton
+									tintColor={JotaColors.text}
+									onPress={() => router.replace("/")}
+								/>
+							),
 						}}
 					/>
 					<Image

@@ -7,9 +7,9 @@
   <hr />
 </div>
 
-O **Explorador Urbano** é um diário de bordo digital para quem ama explorar a cidade. O aplicativo permite capturar momentos, registrar a localização exata de cada descoberta e visualizar todas as suas aventuras em um mapa interativo e inteligente.
+O **Explorador Urbano** é um diário de bordo digital para quem ama exploração. O aplicativo permite capturar locais, registrar a localização exata de cada descoberta e visualizar todos os seus marcadores em um mapa interativo.
 
-Este projeto foi desenvolvido como parte da atividade prática da disciplina de Desenvolvimento Mobile do curso de Análise e Desenvolvimento de Sistemas no SENAI, sob orientação do **Prof. Neilton Barreto**.
+Este projeto foi desenvolvido como parte da atividade prática da disciplina de Desenvolvimento Mobile do curso de **Análise e Desenvolvimento de Sistemas** no SENAI, sob orientação do **Prof. Neilton Barreto**.
 
 ---
 
@@ -21,6 +21,8 @@ Este projeto foi desenvolvido como parte da atividade prática da disciplina de 
 - **Mapa Interativo:** Visualização de registros em um mapa estilizado.
 - **Sistema de Sobreposição:** Organização inteligente de múltiplos registros no mesmo local, evitando sobreposição de marcadores.
 - **Diário Visual:** Popups com foto, descrição, local e data/hora da captura.
+- **Edição e Remoção de Marcadores:** Sistema personalizado de edição e remoção dos marcadores no mapa.
+- **Marcadores por Perto:** Mostra todos os marcadores por perto do usuário usando a fórmula de Haversine para calcular a distância.
 
 ---
 
@@ -45,26 +47,33 @@ O projeto foi construído utilizando o **React Native + Expo**:
   <table>
     <tr>
       <td align="center">
-        <img src="./assets/screenshots/screenshot_index.jpeg" width="220px" alt="Tela Inicial" />
+        <img src="./assets/screenshots/screenshot_index.jpeg" width="220px" alt="Mapa com Marcador" />
         <br />
-        <sub><b>Tela Inicial</b></sub>
+        <sub><b>Tela de Mapa</b></sub>
       </td>
       <td align="center">
-        <img src="./assets/screenshots/screenshot_mapa.jpeg" width="220px" alt="Mapa com Marcadores" />
+        <img src="./assets/screenshots/screenshot_photo.jpeg" width="220px" alt="Registrar Local" />
         <br />
-        <sub><b>Mapa com Marcadores</b></sub>
+        <sub><b>Tela de Registrar Local</b></sub>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <img src="./assets/screenshots/screenshot_photo.jpeg" width="220px" alt="Câmera" />
+        <img src="./assets/screenshots/screenshot_details.jpeg" width="220px" alt="Editar Local" />
         <br />
-        <sub><b>Câmera para fotografia do local</b></sub>
+        <sub><b>Tela de Editar Local</b></sub>
       </td>
       <td align="center">
-        <img src="./assets/screenshots/screenshot_details.jpeg" width="220px" alt="Tela de Adicionar Detalhes" />
+        <img src="./assets/screenshots/screenshot_near.jpeg" width="220px" alt="Marcadores Perto" />
         <br />
-        <sub><b>Tela de Adicionar Detalhes</b></sub>
+        <sub><b>Tela de Marcadores Perto</b></sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="./assets/screenshots/screenshot_deleteAll.jpeg" width="220px" alt="Limpar Marcadores" />
+        <br />
+        <sub><b>Tela de Limpar Marcadores</b></sub>
       </td>
     </tr>
   </table>
@@ -89,7 +98,7 @@ O projeto foi construído utilizando o **React Native + Expo**:
     eas build -p android --profile preview
     ```
 
-_Aviso! Esse projeto usa bibliotecas que NÃO são normalmente suportadas no Navegador. Caso for rodar web, tenha conciência disto._
+_Aviso! Esse projeto usa bibliotecas que **NÃO** são normalmente suportadas no Navegador. Caso for rodar web, tenha conciência disto._
 
 ---
 
