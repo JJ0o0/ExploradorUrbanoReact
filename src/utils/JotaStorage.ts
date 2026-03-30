@@ -11,6 +11,8 @@ export type PhotoData = {
 
 const DATAFILE_NAME = "jotaSalvamentos.json";
 
+// TODO: Trocar algoritmo de banco local para o Supabase
+// TODO: Sistema de Login
 export const JotaStorage = {
 	async savePhoto(
 		tempUri: string,
