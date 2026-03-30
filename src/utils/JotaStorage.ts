@@ -55,7 +55,36 @@ export const JotaStorage = {
 			return false;
 		}
 	},
+	async updatePhoto(id: number, newDescription: string) {
+		try {
+			const photos = await this.getAllPhotos();
+			const updated = photos.map((p) =>
+				p.id === id ? { ...p, description: newDescription } : p,
+			);
 
+			const dataFile = new File(Paths.document, DATAFILE_NAME);
+			await dataFile.write(JSON.stringify(updated));
+			return true;
+		} catch (e) {
+			console.error("Erro ao atualizar:", e);
+			return false;
+		}
+	},
+	async deletePhoto(id: number) {
+		try {
+			const photos = await this.getAllPhotos();
+			const filtered = photos.filter((photo) => photo.id !== id);
+
+			const dataFile = new File(Paths.document, DATAFILE_NAME);
+			await dataFile.write(JSON.stringify(filtered));
+
+			return true;
+		} catch (error) {
+			console.error("Erro ao deletar: ", error);
+
+			return false;
+		}
+	},
 	async getAllPhotos(): Promise<PhotoData[]> {
 		try {
 			const dataFile = new File(Paths.document, DATAFILE_NAME);
@@ -68,7 +97,6 @@ export const JotaStorage = {
 			return [];
 		}
 	},
-
 	async clearPhotos() {
 		try {
 			const dataFile = new File(Paths.document, DATAFILE_NAME);

@@ -10,14 +10,38 @@ import { JotaColors } from "../constants/JotaColors";
 type Props = {
 	text: string;
 	onPressed: (event: GestureResponderEvent) => void;
+	size?: { width: number; height: number };
+	backgroundColor?: string;
+	pressedBackgroundColor?: string;
+	borderColor?: string;
 };
 
 const JotaButton = (props: Props) => {
+	const adaptativeSize =
+		props.size !== undefined
+			? { width: props.size.width, height: props.size.height }
+			: {};
+	const customBG =
+		props.backgroundColor !== undefined
+			? { backgroundColor: props.backgroundColor }
+			: {};
+	const customPBG =
+		props.pressedBackgroundColor !== undefined
+			? { backgroundColor: props.pressedBackgroundColor }
+			: {};
+	const customBorderColor =
+		props.borderColor !== undefined
+			? { borderColor: props.borderColor }
+			: {};
+
 	return (
 		<Pressable
 			style={({ pressed }) => [
 				styles.button,
 				pressed ? styles.buttonPressed : styles.button,
+				pressed ? customPBG : customBG,
+				adaptativeSize,
+				customBorderColor,
 			]}
 			onPress={props.onPressed}
 		>

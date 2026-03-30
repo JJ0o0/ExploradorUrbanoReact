@@ -27,11 +27,7 @@ export default function Picture() {
 			<Stack.Screen
 				options={{
 					headerShown: true,
-					headerStyle: styles.header,
-					headerTitleStyle: styles.headerTitle,
-					headerTransparent: true,
-					headerTintColor: JotaColors.text,
-					headerTitle: "Voltar",
+					headerTitle: "Registrar Local",
 					headerBackTitle: "",
 				}}
 			/>

@@ -15,12 +15,16 @@ type Props = {
 	onPressed: (event: GestureResponderEvent) => void;
 	floating?: boolean;
 	roundness?: number;
+	iconSize?: number;
+	rotate?: number;
 	style?: StyleProp<ViewStyle>;
 };
 
 const JotaIconButton = (props: Props) => {
 	const dynamicRoundness =
 		props.roundness !== undefined ? { borderRadius: props.roundness } : {};
+	const dynamicIconSize = props.iconSize !== undefined ? props.iconSize : 40;
+	const dynamicRotation = props.rotate !== undefined ? props.rotate : 0; // JoJo Reference
 
 	return (
 		<Pressable
@@ -43,7 +47,8 @@ const JotaIconButton = (props: Props) => {
 					style={{ userSelect: "none" }}
 					icon={props.icon as IconProp}
 					color={pressed ? JotaColors.foreground : "white"}
-					size={40}
+					size={dynamicIconSize}
+					transform={{ rotate: dynamicRotation }}
 				/>
 			)}
 		</Pressable>
