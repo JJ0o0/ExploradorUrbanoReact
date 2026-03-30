@@ -44,7 +44,6 @@ const JotaIconButton = (props: Props) => {
 		>
 			{({ pressed }) => (
 				<FontAwesomeIcon
-					style={{ userSelect: "none" }}
 					icon={props.icon as IconProp}
 					color={pressed ? JotaColors.foreground : "white"}
 					size={dynamicIconSize}
